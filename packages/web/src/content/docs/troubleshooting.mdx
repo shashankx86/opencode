@@ -126,6 +126,25 @@ This will force opencode to download the most recent versions of provider packag
 
 ---
 
+### Rate limiting issues
+
+If you're hitting provider rate limits:
+
+1. **No built-in rate limiting**: opencode does not implement rate limiting between requests. Requests are sent as soon as they are needed.
+
+2. **Provider-specific limits**: Each provider has their own rate limits. Check your provider's documentation for their specific limits.
+
+3. **Solutions**:
+   - Use the `timeout` option to control request timeouts (see [providers documentation](/docs/providers))
+   - Configure a proxy service that handles rate limiting
+   - Use the provider's own rate limiting features if available
+
+:::note
+The GitHub Copilot OAuth device code flow polls every 5 seconds during authentication. This is not related to API request rate limiting.
+:::
+
+---
+
 ### Copy/paste not working on Linux
 
 Linux users need to have one of the following clipboard utilities installed for copy/paste functionality to work:
