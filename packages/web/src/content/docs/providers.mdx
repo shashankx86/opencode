@@ -48,6 +48,56 @@ You can customize the base URL for any provider by setting the `baseURL` option.
 
 ---
 
+#### Timeout
+
+You can configure the timeout for requests to a provider by setting the `timeout` option in milliseconds. The default timeout is 300000ms (5 minutes). You can also disable the timeout by setting it to `false`.
+
+```json title="opencode.json" {6}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "anthropic": {
+      "options": {
+        "timeout": 120000
+      }
+    }
+  }
+}
+```
+
+To disable timeout:
+
+```json title="opencode.json" {6}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "anthropic": {
+      "options": {
+        "timeout": false
+      }
+    }
+  }
+}
+```
+
+---
+
+#### Rate Limiting
+
+Currently, **opencode does not implement rate limiting between requests** for any provider. Requests are sent to providers as soon as they are needed without any artificial delays.
+
+If you need to rate limit requests to comply with a provider's API limits, you should:
+
+1. Use the provider's own rate limiting features if available
+2. Configure a proxy service that handles rate limiting
+3. Use the `timeout` option to control request timeouts (but this doesn't rate limit)
+
+:::note
+The only interval-related configuration is for the **GitHub Copilot OAuth device code flow** during authentication, which polls every 5 seconds by default. This is not related to API request rate limiting.
+:::
+
+---
+
 ## opencode zen
 
 opencode zen is a list of models provided by the opencode team that have been
